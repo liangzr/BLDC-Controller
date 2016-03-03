@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BurshlessMotor</string>
+    <string name="large_text">
+        "This is Global show"
+    </string>
+    <string name="action_settings">Settings</string>
+</resources>
