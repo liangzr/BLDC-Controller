@@ -1,4 +1,4 @@
-package com.tamer.burshlessmotor;
+package com.tamer.burshlessmotor.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +9,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ListView;
+
+import com.tamer.burshlessmotor.R;
+import com.tamer.burshlessmotor.adapter.CardsAdapter;
+import com.tamer.burshlessmotor.bean.Card;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import app.akexorcist.bluetotohspp.library.DeviceList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private List<Card> cardList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -26,9 +36,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
-//        RealtimeUpdates speedFeedback = new RealtimeUpdates();
-//        speedFeedback.
+        /* ListView初始化及设置适配器 */
+        initCards();
+        CardsAdapter adapter = new CardsAdapter(HomeActivity.this, R.layout.controlbar_list_item, cardList);
+        ListView cardListView = (ListView) findViewById(R.id.cards_list);
+        cardListView.setAdapter(adapter);
 
+        Card card = new Card(Card.CONTROL_BAR);
+        cardList.add(card);
+
+    }
+
+    private void initCards() {
+        Card card1 = new Card(Card.SWITCH);
+        cardList.add(card1);
+        Card card2 = new Card(Card.CONTROL_BAR);
+        cardList.add(card2);
     }
 
     public void onClick(View v) {

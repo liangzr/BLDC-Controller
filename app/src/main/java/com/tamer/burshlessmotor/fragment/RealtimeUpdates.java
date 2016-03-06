@@ -19,23 +19,28 @@ import java.util.Random;
  */
 public class RealtimeUpdates extends Fragment {
     private final Handler mHandler = new Handler();
-    private Runnable mTimer1;
-    private Runnable mTimer2;
-    private LineGraphSeries<DataPoint> mSeries1;
-    private LineGraphSeries<DataPoint> mSeries2;
-    private double graph2LastXValue = 5d;
+    private Runnable mTimer;
+    private LineGraphSeries<DataPoint> mSeries;
+    private double graphLastXValue = 5d;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_speed, container, false);
 
         GraphView graph = (GraphView) rootView.findViewById(R.id.graph);
-        mSeries2 = new LineGraphSeries<>();
-        graph.addSeries(mSeries2);
+        mSeries = new LineGraphSeries<>();
+        graph.addSeries(mSeries);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(40);
+        graph.getViewport().setMaxX(100);
+        /* 设置标题 */
+        graph.setTitle("即时速度");
+        graph.getGridLabelRenderer().setVerticalAxisTitle("速度 m/s");
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("时间 100ms/格");
+        /* 设置样式 */
+        graph.getGridLabelRenderer().setHorizontalAxisTitleTextSize(30);
+        graph.setTitleTextSize(50);
 
         return rootView;
     }
@@ -43,49 +48,28 @@ public class RealtimeUpdates extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mTimer1 = new Runnable() {
+        mTimer = new Runnable() {
             @Override
             public void run() {
-                mSeries1.resetData(generateData());
-                mHandler.postDelayed(this, 300);
-            }
-        };
-        mHandler.postDelayed(mTimer1, 300);
-
-        mTimer2 = new Runnable() {
-            @Override
-            public void run() {
-                graph2LastXValue += 1d;
-                mSeries2.appendData(new DataPoint(graph2LastXValue, getRandom()), true, 40);
+                graphLastXValue += 1d;
+                mSeries.appendData(new DataPoint(graphLastXValue, getRandom()), true, 100);
                 mHandler.postDelayed(this, 200);
             }
         };
-        mHandler.postDelayed(mTimer2, 1000);
+        mHandler.postDelayed(mTimer, 100);
     }
 
     @Override
     public void onPause() {
-        mHandler.removeCallbacks(mTimer1);
-        mHandler.removeCallbacks(mTimer2);
+        mHandler.removeCallbacks(mTimer);
         super.onPause();
     }
 
-    private DataPoint[] generateData() {
-        int count = 30;
-        DataPoint[] values = new DataPoint[count];
-        for (int i=0; i<count; i++) {
-            double x = i;
-            double f = mRand.nextDouble()*0.15+0.3;
-            double y = Math.sin(i*f+2) + mRand.nextDouble()*0.3;
-            DataPoint v = new DataPoint(x, y);
-            values[i] = v;
-        }
-        return values;
-    }
 
-    double mLastRandom = 2;
+    double mLastRandom = 10;
     Random mRand = new Random();
+
     private double getRandom() {
-        return mLastRandom += mRand.nextDouble()*0.5 - 0.25;
+        return mLastRandom += mRand.nextDouble() * 0.5 - 0.25;
     }
 }
