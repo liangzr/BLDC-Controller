@@ -12,30 +12,82 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:orientation="vertical">
 
-        <fragment
-            android:id="@+id/rt_fg"
-            android:name="com.tamer.burshlessmotor.fragment.RealtimeUpdates"
+        <LinearLayout
+            android:id="@+id/list_item_speed_control"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginTop="30dp"
-            android:layout_margin="10dp"
-            tools:layout="@layout/fragment_speed" />
+            android:background="#ffffff"
+            android:padding="10dp"
+            android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/cards_list"
+            <fragment
+                android:id="@+id/rt_fg"
+                android:name="com.tamer.burshlessmotor.fragment.RealtimeUpdates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="20dp"
+                tools:layout="@layout/fragment_speed" />
+
+            <SeekBar
+                android:id="@+id/list_item_seek_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:padding="20dp" />
+
+            <RadioGroup
+                android:id="@+id/rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radio_btn_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="10dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="@string/speed_mode" />
+
+                <RadioButton
+                    android:id="@+id/radio_btn_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="16sp"
+                    android:text="@string/pwm_mode" />
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/list_item_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="20dp"
-            android:padding="20dp"
-            android:scrollbarStyle="outsideOverlay"
-            tools:listitem="@layout/controlbar_list_item" />
+            
+            android:layout_marginTop="10dp"
+            android:background="#ffffff"
+            android:divider="#eeeeee"
+            android:orientation="vertical"
+            android:padding="10dp">
 
+            <Switch
+                android:id="@+id/list_item_start_motor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:text="@string/start_motor" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

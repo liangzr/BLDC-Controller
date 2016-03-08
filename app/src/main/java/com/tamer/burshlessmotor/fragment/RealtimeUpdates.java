@@ -22,6 +22,7 @@ public class RealtimeUpdates extends Fragment {
     private Runnable mTimer;
     private LineGraphSeries<DataPoint> mSeries;
     private double graphLastXValue = 5d;
+    private int speedData = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +46,10 @@ public class RealtimeUpdates extends Fragment {
         return rootView;
     }
 
+    public void setSpeedData(String speedData) {
+        this.speedData = Integer.parseInt(speedData);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -52,7 +57,7 @@ public class RealtimeUpdates extends Fragment {
             @Override
             public void run() {
                 graphLastXValue += 1d;
-                mSeries.appendData(new DataPoint(graphLastXValue, getRandom()), true, 100);
+                mSeries.appendData(new DataPoint(graphLastXValue, speedData), true, 100);
                 mHandler.postDelayed(this, 200);
             }
         };
@@ -69,7 +74,7 @@ public class RealtimeUpdates extends Fragment {
     double mLastRandom = 10;
     Random mRand = new Random();
 
-    private double getRandom() {
+    private double getData() {
         return mLastRandom += mRand.nextDouble() * 0.5 - 0.25;
     }
 }

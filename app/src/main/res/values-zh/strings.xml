@@ -3,7 +3,7 @@
     <string name="app_name">无刷电机</string>
     <string name="action_settings">设置</string>
     <string name="large_text">这是中文显示</string>
-    <string name="spped_mode">转速模式</string>
     <string name="pwm_mode">油门模式</string>
     <string name="start_motor">启动电机</string>
+    <string name="speed_mode">转速模式</string>
 </resources>
