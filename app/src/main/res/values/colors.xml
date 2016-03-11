@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#00838f</color>
     <color name="colorAccent">#d32f2f</color>
     <color name="colorConnected">#64dd17</color>
+    <color name="colorConnecting">#cddc39</color>
     <color name="lightGrey">#eeeeee</color>
 </resources>

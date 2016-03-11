@@ -1,1 +1,1 @@
-include ':app', ':GraphView', ':library'
+include ':app', ':GraphView'

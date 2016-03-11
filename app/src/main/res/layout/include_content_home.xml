@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <fragment
-                android:id="@+id/rt_fg"
+                android:id="@+id/realtime_fragment"
                 android:name="com.tamer.burshlessmotor.fragment.RealtimeUpdates"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

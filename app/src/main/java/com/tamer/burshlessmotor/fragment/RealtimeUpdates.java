@@ -46,8 +46,8 @@ public class RealtimeUpdates extends Fragment {
         return rootView;
     }
 
-    public void setSpeedData(String speedData) {
-        this.speedData = Integer.parseInt(speedData);
+    public void setSpeedData(int speedData) {
+        this.speedData = speedData;
     }
 
     @Override
