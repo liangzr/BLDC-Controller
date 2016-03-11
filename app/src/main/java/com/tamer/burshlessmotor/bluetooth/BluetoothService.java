@@ -51,6 +51,11 @@ public class BluetoothService {
             UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
     private static final UUID MY_UUID_INSECURE =
             UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
+    // Unique UUID for this application
+    private static final UUID UUID_ANDROID_DEVICE =
+            UUID.fromString("fa87c0d0-afac-11de-8a39-0800200c9a66");
+    private static final UUID UUID_OTHER_DEVICE =
+            UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // Member fields
     private final BluetoothAdapter mAdapter;
@@ -300,7 +305,7 @@ public class BluetoothService {
             try {
                 if (secure) {
                     tmp = mAdapter.listenUsingRfcommWithServiceRecord(NAME_SECURE,
-                            MY_UUID_SECURE);
+                            UUID_OTHER_DEVICE);
                 } else {
                     tmp = mAdapter.listenUsingInsecureRfcommWithServiceRecord(
                             NAME_INSECURE, MY_UUID_INSECURE);
@@ -387,7 +392,7 @@ public class BluetoothService {
             try {
                 if (secure) {
                     tmp = device.createRfcommSocketToServiceRecord(
-                            MY_UUID_SECURE);
+                            UUID_OTHER_DEVICE);
                 } else {
                     tmp = device.createInsecureRfcommSocketToServiceRecord(
                             MY_UUID_INSECURE);
